@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import Users from "./companents/Users";
+
+// import Comments from "./companents/Comments";
 
 const Backend = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/comments")
+    fetch("https://jsonplaceholder.typicode.com/todos")
       .then((response) => response.json())
       .then((json) => setData(json));
   }, []);
@@ -13,17 +16,7 @@ const Backend = () => {
 
   return (
     <div className="container">
-      <div className="users-info">
-        {data.map((el) => (
-          <div key={el.id} className="wrapper">
-            <i className="text">{el.body}</i>
-            <div className="info">
-              <h4 className="title">{el.name}</h4>
-              <a className="email" href={`mailto:${el.email}`}>{el.email}</a>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Users {...data} />
     </div>
   );
 };
